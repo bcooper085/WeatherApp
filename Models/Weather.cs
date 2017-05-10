@@ -7,38 +7,39 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace WeatherApp.Models
 {
     public class Weather
     {
 
         [Key]
-        public static string City { get; set; }
-        public Weather(string CityName) {
-            City = CityName;
-        }
+        public string CityName { get; set; }
+        public int ApiId { get; set; }
+        public int UserId { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public List<Weather> GetWeather()
+        public static JObject GetWeather(string cityString)
         {
-            
-            var apiKey = "fa04998c118d8986d05549418958fabf";
-            var request = new RestRequest("http://api.openweathermap.org/data/2.5/weather?q=" + Weather.City + "&appid=" + apiKey, Method.GET);
-            
+            var client = new RestClient("http://api.openweathermap.org/data/2.5/weather?q=");
+            var request = new RestRequest(cityString, Method.GET);
+            request.AddHeader("X-Mashape-Key", EnvironmentVariables.ApiKey);
+            request.AddHeader("Accept", "application/json");
+
             var response = new RestResponse();
             Task.Run(async () =>
             {
-                response = await GetResponseContentAsync(request) as RestResponse;
+                response = await GetResponseContentAsync(client, request) as RestResponse;
             }).Wait();
-            JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(response.Content);
-            var weatherList = JsonConvert.DeserializeObject<List<Weather>>(jsonResponse["name"].ToString());
-            return weatherList;
+            JObject result = JsonConvert.DeserializeObject<JObject>(response.Content);
+            Console.WriteLine(result);
+            return result;
         }
 
-        public static Task<IRestResponse> GetResponseContentAsync(RestRequest theRequest)
+        public static Task<IRestResponse> GetResponseContentAsync(RestClient client, RestRequest request)
         {
-            var client = new RestClient();
             var tcs = new TaskCompletionSource<IRestResponse>();
-            client.ExecuteAsync(theRequest, response => {
+            client.ExecuteAsync(request, response => {
                 tcs.SetResult(response);
             });
             return tcs.Task;

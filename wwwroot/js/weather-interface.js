@@ -1,14 +1,17 @@
-﻿var apiKey = "fa04998c118d8986d05549418958fabf";
-
-$(document).ready(function () {
-    $('#weather-location').click(function () {
-        var city = $('#location').val();
-        $('#location').val("");
-        $('.showWeather').text("The city you have chosen is " + city + ".");
-        $.ge
-        t('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey, function (response) {
-            console.log(response)
-                $('.showWeather').text("The humidity in " + city + " is " + response.main.humidity + "%");
-        });
-    });
+﻿$(function () {
+    $('#get-weather').click(function () {
+        event.preventDefault();
+        console.log($(this).serialize());
+        $.ajax({
+            url: 'Home/CitySearch',
+            type: 'GET',
+            data: {cityName: $("#cityName").val()},
+            dataType: 'json',
+            success: function (result) {
+                var htmlString;
+                $(".weather").html(result.name);
+                console.log(result);
+            }
+        })
+    })
 });

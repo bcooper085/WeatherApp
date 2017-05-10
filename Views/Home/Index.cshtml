@@ -1,7 +1,20 @@
-﻿<div class="weather-collect">
-    <h1>Get Weather Conditions From Anywhere!</h1>
-    <label for="location">Enter a location:</label>
-    <input id="location" type="text">
-    <button class="btn-success" id="weather-location">Get Current Humidity!</button>
-    <div class="showWeather"></div>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input class="form-control" name="cityName" id="cityName" />
+<button id="get-weather">Get Weather</button>
+<div>
+    <div class="weather">
+
+
+    </div>
 </div>
+
+@*<form action="CitySearch" class="display-names">
+    <h1>Get Weather Conditions From Anywhere!</h1>
+    <label for="cityName">Enter a location:</label>
+    <input type="text" name="cityName">
+    <button type="submit">Search</button>
+</form>
+<div class="names"></div>*@

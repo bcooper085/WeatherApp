@@ -218,6 +218,7 @@ C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\Migrations\20170510162147_In
 C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\Migrations\ApplicationDbContextModelSnapshot.cs
 C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\Models\ApplicationDbContext.cs
 C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\Models\ApplicationUser.cs
+C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\Models\EnvironmentVariables.cs
 C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\Models\Weather.cs
 C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\ViewModels\LoginViewModel.cs
 C:\Users\epicodus\Desktop\WeatherApp\src\WeatherApp\ViewModels\RegisterViewModel.cs
