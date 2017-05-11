@@ -14,11 +14,34 @@
     
 </head>
 <body>
-    
-        
+    <main>
+        <nav>
+            <div class="nav-wrapper">
+                <span class="title">@Html.ActionLink("Weather Now", "Index", "Home")</span>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink(User.Identity.Name, "Index", "Account")</li>
+                        <li>
+                            @using (Html.BeginForm("LogOff", "Account"))
+                            {
+                                <input type="submit" id="logout" value="Logout" class="waves-effect waves-light btn" />
+
+                            }
+                        </li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                    }
+                </ul>
+            </div>
+        </nav>
         <div class="container">
             @RenderBody()
         </div>
-      
+    </main>
 </body>
 </html>
